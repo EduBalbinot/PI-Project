@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="google" content="notranslate" />
+  <link rel="stylesheet" href="_css/main.css">
+  <link rel="stylesheet" href="_css/inicio.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body>
+  <div id="mid">
+  </div>
+  <div id="top">
+    <div id="buttons">
+      <button class="botaoInicial" id="botaoLogin" onclick=mostraLogin()>ENTRAR</button>
+      <button class="botaoInicial" onclick=mostraCadastro()>CADASTRAR e</button>
+    </div>
+  </div>
+  <div id="botsss">
+  </div>
+  <div id="overlayLogin" class="overlay">
+    <div class="overlay-content">
+      <button class="botaoFechaCadastro" ; onclick=fechaLogin()></button>
+      <form id="loginForm" method="post">
+        <p id="senhaInvalida" style="display: none; color: red;">Login ou senha inválidos</p>
+        <p>
+          Login:
+          <input type="text" name="nomeCadastro" id="nomeCadastro" />
+        </p>
+        <p>
+          Senha:
+          <input type="text" name="senha" id="senha" />
+        </p>
+        <p>
+          <input type="submit" name="btnEntrar" id="btnEntrar" value="Entrar"/>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div id="overlayCadastro" class="overlay">
+    <div class="overlay-content">
+      <button class="botaoFechaCadastro" ; onclick=fechaLogin()></button>
+      <form id="cadastroForm" method="post">
+        Crie sua conta:
+        <p>
+          Login:
+          <input type="text" name="nomeCadastro" id="nomeCadastro" />
+        </p>
+        <p>
+          Email:
+          <input type="text" name="email" id="email" />
+        </p>
+        <p>
+          Senha:
+          <input type="text" name="senha" id="senha" />
+        </p>
+        <p>
+          <input type="submit" name="btnEntrar" id="btnEntrar" value="Entrar"/>
+        </p>
+      </form>
+    </div>
+  </div>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('#loginForm').submit(function(e) {
+          e.preventDefault();
+          $.ajax({
+              type: "POST",
+              url: '_php/session.php',
+              data: $(this).serialize(),
+              success: function(response)
+              {
+                   var jsonData = JSON.parse(response);
+                   // alert(response);
+                   if(jsonData >= 0) window.location='_php/aeradores.php';
+                   else document.getElementById("senhaInvalida").style.display = "block";
+             }
+         });
+       });
+       $('#cadastroForm').submit(function(e) {
+           e.preventDefault();
+           $.ajax({
+               type: "POST",
+               url: '_php/cadastro.php',
+               data: $(this).serialize(),
+               success: function(response)
+               {
+                 fechaLogin();
+                 mostraLogin();
+                 alert("Cadastro bem sucedido");
+              }
+          });
+        });
+  });
+
+  function fechaLogin(){
+    document.getElementById("overlayLogin").style.display = "none";
+    document.getElementById("overlayCadastro").style.display = "none";
+  }
+
+  function mostraLogin(){
+      document.getElementById("overlayLogin").style.display = "flex";
+  }
+
+  function mostraCadastro(){
+      document.getElementById("overlayCadastro").style.display = "flex";
+  }
+
+  </script>
+</body>
