@@ -1,0 +1,7 @@
+-compressor:A6
+
+-valvula_pwm:A12
+
+-sensores temperatura:A7
+
+-sensor pressao:A8, A9
