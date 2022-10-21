@@ -1,0 +1,64 @@
+:root {
+  --topnav-height: 9vh;
+}
+
+.topnav {
+  overflow: hidden;
+  height: var(--topnav-height);
+  min-height: 80px;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 1vh 5vw 0 2vw;
+}
+
+.topnav .buttons {
+  float: right;
+  display: inline-flex;
+  text-align: center;
+  text-decoration: none;
+  height: 7vh;
+  min-height: 60px;
+}
+
+.buttons button {
+  padding: 1em 2.1em 1.1em;
+  border-radius: 50em;
+  margin: 8px 8px 8px 8px;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  -webkit-box-shadow: 0em -0.3rem 0em rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  border-style: none;
+  background-color: white;
+}
+
+#botaoLogin{
+  background: white url('/_media/icons/userIcon.png') no-repeat;
+  background-size: 17%;
+  background-position: 15% 40%;
+  padding-left: 3em;
+}
+
+.topnav img {
+  display: inline-flex;
+  height: 100%;
+}
+
+@media all and (max-width: 600px) {
+  .topnav {
+    height: calc(var(--topnav-height)*2);
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .topnav img {
+    height: 50%;
+  }
+  .topnav .buttons {
+      float: center;
+  }
+}

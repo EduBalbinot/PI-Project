@@ -1,0 +1,37 @@
+.videoBox {
+  width: 60vw;
+  min-width: 600px;
+  padding: 3vw 0 3vw;
+  margin: 0 auto;
+  top: calc(var(--topnav-height)*1.5);
+  border-radius: 5vw;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  z-index: 1001;
+}
+
+.videoBox iframe {
+  width:90%;
+  aspect-ratio: 16/9;
+  margin: 0 auto;
+}
+
+@media all and (max-width: 600px) {
+  .videoBox {
+    width: 100vw;
+    min-width: 0px;
+    max-height: 40vh;
+    top: calc(var(--topnav-height)*2.5);
+  }
+}
+
+@media all and (max-height: 600px) {
+  .videoBox {
+    top: calc(var(--topnav-height)*3);
+    width: 100vh;
+    min-width: 0px;
+  }
+}

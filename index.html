@@ -1,22 +1,35 @@
 <!doctype html>
-<html>
+<html lang="pt">
+
 <head>
-  <meta name="google" content="notranslate" />
-  <link rel="stylesheet" href="_css/main.css">
-  <link rel="stylesheet" href="_css/inicio.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="_css/index/waves.css">
+  <link rel="stylesheet" href="_css/index/topnav.css">
+  <link rel="stylesheet" href="_css/index/videoBox.css">
+  <link rel="stylesheet" href="_css/overlay.css">
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
+
 <body>
-  <div id="mid">
-  </div>
-  <div id="top">
-    <div id="buttons">
-      <button class="botaoInicial" id="botaoLogin" onclick=mostraLogin()>ENTRAR</button>
-      <button class="botaoInicial" onclick=mostraCadastro()>CADASTRAR</button>
+  <div class="topnav">
+    <img src="_media/icons/logo.png">
+    <div class="buttons">
+      <button id="botaoLogin" onclick=mostraLogin()>entrar</button>
+      <button onclick=mostraCadastro()>cadastrar</button>
     </div>
   </div>
-  <div id="botsss">
-  </div>
+  <section>
+    <div class="videoBox">
+      <iframe
+      src="https://www.youtube.com/embed/Yf_xkC6vu9Q?autoplay=1&mute=1">
+      </iframe>
+    </div>
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+    <div class="wave wave4"></div>
+  </section>
+
   <div id="overlayLogin" class="overlay">
     <div class="overlay-content">
       <button class="botaoFechaCadastro" ; onclick=fechaLogin()></button>
@@ -62,52 +75,52 @@
   </div>
 
 
-
-<script type="text/javascript">
-  $(document).ready(function() {
-      $('#loginForm').submit(function(e) {
-          e.preventDefault();
-          $.ajax({
-              type: "POST",
-              url: '_php/session.php',
-              data: $(this).serialize(),
-              success: function(response)
-              {
-                   var jsonData = JSON.parse(response);
-                   // alert(response);
-                   if(jsonData >= 0) window.location='_php/aeradores.php';
-                   else document.getElementById("senhaInvalida").style.display = "block";
-             }
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $('#loginForm').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: '_php/session.php',
+                data: $(this).serialize(),
+                success: function(response)
+                {
+                     var jsonData = JSON.parse(response);
+                     // alert(response);
+                     if(jsonData >= 0) window.location='_php/aeradores.php';
+                     else document.getElementById("senhaInvalida").style.display = "block";
+               }
+           });
          });
-       });
-       $('#cadastroForm').submit(function(e) {
-           e.preventDefault();
-           $.ajax({
-               type: "POST",
-               url: '_php/cadastro.php',
-               data: $(this).serialize(),
-               success: function(response)
-               {
-                 fechaLogin();
-                 mostraLogin();
-                 alert("Cadastro bem sucedido");
-              }
+         $('#cadastroForm').submit(function(e) {
+             e.preventDefault();
+             $.ajax({
+                 type: "POST",
+                 url: '_php/cadastro.php',
+                 data: $(this).serialize(),
+                 success: function(response)
+                 {
+                   fechaLogin();
+                   mostraLogin();
+                   alert("Cadastro bem sucedido");
+                }
+            });
           });
-        });
-  });
+    });
 
-  function fechaLogin(){
-    document.getElementById("overlayLogin").style.display = "none";
-    document.getElementById("overlayCadastro").style.display = "none";
-  }
+    function fechaLogin(){
+      document.getElementById("overlayLogin").style.display = "none";
+      document.getElementById("overlayCadastro").style.display = "none";
+    }
 
-  function mostraLogin(){
-      document.getElementById("overlayLogin").style.display = "flex";
-  }
+    function mostraLogin(){
+        document.getElementById("overlayLogin").style.display = "flex";
+    }
 
-  function mostraCadastro(){
-      document.getElementById("overlayCadastro").style.display = "flex";
-  }
+    function mostraCadastro(){
+        document.getElementById("overlayCadastro").style.display = "flex";
+    }
 
-  </script>
+    </script>
 </body>
+</html>
