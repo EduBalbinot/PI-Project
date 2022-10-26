@@ -1,58 +1,49 @@
 
 <?php
-echo "aa";
+//Biblioteca de conexão ao BD
 include 'acess.php';
-//Código de conexão ao BD
-//include "conexao.php";
-$data = file_get_contents("php://input");
 
+//Confere se é método POST
 if (strtoupper($_SERVER['REQUEST_METHOD']) != 'POST') {
-  // throw new Exception('Only POST requests are allowed');
-  echo "erro1";
+  throw new Exception('Only POST requests are allowed');
 }
 
+//Confere se o formato de arquivo é Json
 $content_type = isset($_SERVER['CONTENT_TYPE']) ? $_SERVER['CONTENT_TYPE'] : '';
 if (stripos($content_type, 'application/json') === false) {
-  echo "erro2";
   throw new Exception('Content-Type must be application/json');
 }
 else
 {
-// Read the input stream
+
+//Le o arquivo recebido
 $body = file_get_contents("php://input");
 
-// Decode the JSON object
+// Decodifica o objeto Json
 $object = json_decode($body, true);
 $obj = json_decode($body);
 
-// Throw an exception if decoding failed
+// Avisa se a decodificação falhar
 if (!is_array($object)) {
-  echo "erro3";
   throw new Exception('Failed to decode JSON object');
   }
 }
 
-$hora = $obj->hora;
-$vazao = $obj->vazao;
-$temp = $obj->temp;
-$estadoComp = $obj->estadoComp;
-$dc = $obj->dutyCycle;
-$data = $obj->data;
-$IdAerador = $obj->IdAerador;
-
 $conn = con();
-
-echo $obj->Aeradores[0]->hora;
-echo $obj->Aeradores[1]->hora;
-
-// echo $hora,$vazao,$temp,$estadoComp,$dc,$data,$IdAerador;
-
-$sql = "INSERT INTO leitura(Hora, Vazao, Temp, EstadoComp, DutyCycle, Data, IDAerador)
-                  VALUES ('$hora',$vazao,$temp,$estadoComp,$dc,'$data',$IdAerador)" ; // Insere no DB
-mysqli_query($conn, $sql);
+$aerador=$obj->Aeradores;
+for ($x = 0; $x < sizeof($obj->Aeradores); $x++) {
+  echo "Aerador $x:";
+  $hora       = $aerador[$x]->hora;
+  $vazao      = $aerador[$x]->vazao;
+  $temp       = $aerador[$x]->temp;
+  $estadoComp = $aerador[$x]->estadoComp;
+  $dc         = $aerador[$x]->dutyCycle;
+  $data       = $aerador[$x]->data;
+  $IdAerador  = $aerador[$x]->IdAerador;
+  print "hora: $hora, vazao: $vazao, temp: $temp, compressor: $estadoComp, DC: $dc, data: $data, Id: $IdAerador\n";
+//  $sql = "INSERT INTO leitura(Hora, Vazao, Temp, EstadoComp, DutyCycle, Data, IDAerador)
+//                    VALUES ('$hora',$vazao,$temp,$estadoComp,$dc,'$data',$IdAerador)" ; // Insere no DB
+//  mysqli_query($conn, $sql);
+}
 $conn->close();
-
-//TERMINAL COMMAND
-// sudo tail -f /var/log/apache2/access.log
-// curl -i -X POST -H 'Content-Type: application/json' -d '{"address":"Sunset Boulevard"}' http://192.168.1.158/registraMedicoes.php
 ?>
