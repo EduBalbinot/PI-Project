@@ -3,11 +3,15 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="_css/colors.css">
   <link rel="stylesheet" href="_css/index/waves.css">
   <link rel="stylesheet" href="_css/index/topnav.css">
   <link rel="stylesheet" href="_css/index/videoBox.css">
   <link rel="stylesheet" href="_css/overlay.css">
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"
+          integrity="sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA="
+          crossorigin="anonymous"></script> -->
 </head>
 
 <body>
@@ -18,11 +22,14 @@
       <button onclick=mostraCadastro()>cadastrar</button>
     </div>
   </div>
+
   <section>
+    <!-- Vídeo -->
     <div class="videoBox">
       <iframe
       src="https://www.youtube.com/embed/Yf_xkC6vu9Q?autoplay=1&mute=1">
       </iframe>
+      <!-- Ondas -->
     </div>
     <div class="wave wave1"></div>
     <div class="wave wave2"></div>
@@ -33,19 +40,21 @@
   <div id="overlayLogin" class="overlay">
     <div class="overlay-content">
       <button class="botaoFechaCadastro" ; onclick=fechaLogin()></button>
+      <h1>Entrar</h1>
+      <h2>Preencha com seus Dados</h2>
       <form id="loginForm" method="post">
-        <p id="senhaInvalida" style="display: none; color: red;">Login ou senha inválidos</p>
+        <p></p>
         <p>
           Login:
           <input type="text" name="nomeCadastro" id="nomeCadastro" />
         </p>
         <p>
           Senha:
-          <input type="text" name="senha" id="senha" />
+          <input type="password" name="senha" id="senha" />
         </p>
-        <p>
+        <p id="senhaInvalida" style="display: none; color: red;">Login e/ou senha inválidos!</p>
+        <p id="spacerSenha"></p>
           <input type="submit" name="btnEntrar" id="btnEntrar" value="Entrar"/>
-        </p>
       </form>
     </div>
   </div>
@@ -53,22 +62,23 @@
   <div id="overlayCadastro" class="overlay">
     <div class="overlay-content">
       <button class="botaoFechaCadastro" ; onclick=fechaLogin()></button>
+      <h1>Crie sua conta</h1>
+      <h2>Preencha com seus Dados</h2>
       <form id="cadastroForm" method="post">
-        Crie sua conta:
         <p>
-          Login:
+          Nome:
           <input type="text" name="nomeCadastro" id="nomeCadastro" />
         </p>
         <p>
-          Email:
+          E-mail:
           <input type="text" name="email" id="email" />
         </p>
         <p>
           Senha:
-          <input type="text" name="senha" id="senha" />
+          <input type="password" name="senha" id="senha" />
         </p>
         <p>
-          <input type="submit" name="btnEntrar" id="btnEntrar" value="Entrar"/>
+          <input type="submit" name="btnEntrar" id="btnEntrar" value="Cadastrar"/>
         </p>
       </form>
     </div>
@@ -76,6 +86,7 @@
 
 
   <script type="text/javascript">
+  // $('input[name="email"]').mask('0000/00/00');
     $(document).ready(function() {
         $('#loginForm').submit(function(e) {
             e.preventDefault();
@@ -88,10 +99,14 @@
                      var jsonData = JSON.parse(response);
                      // alert(response);
                      if(jsonData >= 0) window.location='_php/aeradores.php';
-                     else document.getElementById("senhaInvalida").style.display = "block";
+                     else{
+                       document.getElementById("senhaInvalida").style.display = "block";
+                       document.getElementById("spacerSenha").style.display = "none";
+                     }
                }
            });
          });
+
          $('#cadastroForm').submit(function(e) {
              e.preventDefault();
              $.ajax({
@@ -109,15 +124,21 @@
     });
 
     function fechaLogin(){
-      document.getElementById("overlayLogin").style.display = "none";
-      document.getElementById("overlayCadastro").style.display = "none";
+      document.getElementById("overlayLogin").style.animation = "fadeOut 1s";
+      document.getElementById("overlayCadastro").style.animation = "fadeOut 1s";
+      setTimeout(function() {
+        document.getElementById("overlayLogin").style.display = "none";
+        document.getElementById("overlayCadastro").style.display = "none";
+      }, 1000);
     }
 
     function mostraLogin(){
+        document.getElementById("overlayLogin").style.animation = "fadeIn 1s";
         document.getElementById("overlayLogin").style.display = "flex";
     }
 
     function mostraCadastro(){
+        document.getElementById("overlayCadastro").style.animation = "fadeIn 1s";
         document.getElementById("overlayCadastro").style.display = "flex";
     }
 

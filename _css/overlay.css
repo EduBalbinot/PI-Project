@@ -1,33 +1,43 @@
 .overlay {
-  box-sizing: border-box;
   margin: 0px;
   min-width: 0px;
-  display: block;
+  display: none;
   position: fixed;
   align-items: center;
   justify-content: center;
   z-index: 20;
   inset: 0px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
+  animation: fadeIn 1s;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .overlay-content {
-  min-width: 200px;
-  display: flex;
-  border-radius: 6px;
-  background-color: rgb(255, 255, 255);
-  padding: 24px;
-  justify-content: flex-end;
-  height:35vh;
-  width: 20vw;
+  border-radius: 2em;
+  background-color: #E7E6E6;
+  padding: 1em 2em 2em 2em;
+  height:600px;
+  width: 500px;
 }
 
 .botaoFechaCadastro{
+  float: right;
   padding: 10px;
   display:block;
-  position:absolute;
-  margin-top: -20px;
-  margin-right: -20px;
+  position:relative;
+  left: 0;
+  top: 0;
+  height: 40px;
+  width: 40px;
   cursor: pointer;
   border: none;
   background:url('/_media/icons/closeButton.png') center no-repeat; background-size: 100% 100%;
@@ -35,14 +45,14 @@
 }
 
 .botaoFechaCadastro:hover{
-padding: 12px;
-margin-top: -22px;
-margin-right: -22px;
+  height: 50px;
+  width: 50px;
+  margin-top: -4px;
+  margin-right: -4px;
 }
 
 #botaoMostraCadastro{
   padding: 10px;
-  display:block;
   position:absolute;
   height: 10px;
   width: 10px;
@@ -52,7 +62,68 @@ margin-right: -22px;
   border-radius: 10px;
 }
 
-#loginform > p{
+form{
+  width: 100%;
+  height: 90%;
+  font-size: 2.5rem;
+  align-items: stretch;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+
+h1{
+  font-size: 3rem;
+  font-weight:bolder;
+}
+
+h2{ font-size: 1rem;}
+
+form > p{
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+  align-items: baseline;
+}
+
+input[type=text], input[type=password]{
+  width: 70%;
+  height: 4rem;
+  font-size: 2rem;
+  border-radius: 0.2rem;
+  border-width: 4px;
+}
+
+input[type=submit] {
+  width: 100%;
+  padding: 1rem;
+  font-size: 3rem;
+  font-weight: bolder;
+  border-radius: 1rem;
+  border: none;
+  background-color: var(--color-button);
+  cursor: pointer;
+}
+
+#spacerSenha{
+  height: 3rem;
+}
+
+#senhaInvalida{
+  height: 3rem;
+}
+
+@media all and (max-width: 600px) {
+.overlay-content {
+    width: 100%;
+  }
+  #senhaInvalida{
+    font-size: 2rem;
+  }
+  form > p{
+    flex-wrap: wrap;
+  }
+  input[type=text], input[type=password]{
+    width: 100%;
+  }
 }

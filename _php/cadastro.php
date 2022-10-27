@@ -3,7 +3,7 @@ if ($_POST['nomeCadastro']) {
 
   include 'acess.php';
   $conn = con();
-  $senha = $_POST['senha'];
+  $senha =  password_hash($_POST['senha'], PASSWORD_BCRYPT);
   $nome = $_POST['nomeCadastro'];
   $email = $_POST['email'];
 

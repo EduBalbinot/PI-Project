@@ -1,20 +1,20 @@
 .videoBox {
   width: 60vw;
   min-width: 600px;
-  padding: 3vw 0 3vw;
+  padding: 2vw 0 2vw;
   margin: 0 auto;
   top: calc(var(--topnav-height)*1.5);
-  border-radius: 5vw;
+  border-radius: 4vw;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: gray;
+  background-color: var(--color-box);
   z-index: 1001;
 }
 
 .videoBox iframe {
-  width:90%;
+  width:93%;
   aspect-ratio: 16/9;
   margin: 0 auto;
 }

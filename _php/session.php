@@ -15,7 +15,7 @@ if ($_POST['nomeCadastro'] && $_POST['senha']) {
     // exit();
   $info = $result->fetch_assoc();
   $userSenha=$info["senha"];
-   if($userSenha == $senha)
+   if(password_verify($senha, $userSenha))
   {
     session_start();
     $_SESSION["userID"]=$info["IDUsuario"];
