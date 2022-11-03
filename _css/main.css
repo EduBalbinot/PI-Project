@@ -1,50 +1,8 @@
-.overlay {
-  box-sizing: border-box;
-  margin: 0px;
-  min-width: 0px;
-  display: none;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  inset: 0px;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.overlay-content {
-  min-width: 200px;
-  display: flex;
-  border-radius: 6px;
-  background-color: rgb(255, 255, 255);
-  padding: 24px;
-  justify-content: flex-end;
-  height:35vh;
-  width: 20vw;
-}
-
 #tabela{
   position:absolute;
   z-index: 0;
   margin-top: 30px;
   }
-
-.botaoFechaCadastro{
-  padding: 10px;
-  display:block;
-  position:absolute;
-  margin-top: -20px;
-  margin-right: -20px;
-  cursor: pointer;
-  border: none;
-  background:url('/_media/icons/closeButton.png') center no-repeat; background-size: 100% 100%;
-  border-radius: 50%;
-}
-
-.botaoFechaCadastro:hover{
-padding: 12px;
-margin-top: -22px;
-margin-right: -22px;
-}
 
 #botaoMostraCadastro{
   padding: 10px;
@@ -61,10 +19,4 @@ margin-right: -22px;
 #loginform > p{
   display: flex;
   justify-content: space-between;
-}
-
-#main {
-  margin-left: 10%; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 0px;
 }

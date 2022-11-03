@@ -41,9 +41,9 @@ for ($x = 0; $x < sizeof($obj->Aeradores); $x++) {
   $data       = $aerador[$x]->data;
   $IdAerador  = $aerador[$x]->IdAerador;
   print "hora: $hora, vazao: $vazao, temp: $temp, compressor: $estadoComp, DC: $dc, data: $data, Id: $IdAerador\n";
-//  $sql = "INSERT INTO leitura(Hora, Vazao, Temp, EstadoComp, DutyCycle, Data, IDAerador)
-//                    VALUES ('$hora',$vazao,$temp,$estadoComp,$dc,'$data',$IdAerador)" ; // Insere no DB
-//  mysqli_query($conn, $sql);
+ // $sql = "INSERT INTO leitura(Hora, Vazao, Temp, EstadoComp, DutyCycle, Data, IDAerador)
+ //                   VALUES ('$hora',$vazao,$temp,$estadoComp,$dc,'$data',$IdAerador)" ; // Insere no DB
+ // mysqli_query($conn, $sql);
 }
 $conn->close();
 ?>

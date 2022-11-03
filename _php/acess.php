@@ -36,36 +36,37 @@ function tabela($sessao){
   $sql = "SELECT * FROM aerador WHERE IDUsuario=$sessao";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
-    // output data of each row
-    echo "<table id=\"tabelaAcesso\">
-            <tr>
-              <th>Id</th>
-              <th>Nome</th>
-              <th>Boias</th>
-              <th>Capacidade</th>
-              <th>Marca</th>
-              <th>Data Insta.</th>
-              <th>Data Manut.</th>
-              <th>MAC</th>
-              <th>Deletar</th>
-              <th>Editar</th>
-            </tr>";
-
+    echo "<section class=\"cards\">";
     while($row = $result->fetch_assoc()) {
-      echo "<tr id=\"aerador".$row["IDAerador"].      "\">
-           <td>" .  $row["IDAerador"]   .             "</td>
-           <td><button id=\"".$row["IDAerador"]."\" onclick=botaoAerador(this.id)>".$row["Nome"]."</td>
-           <td>" .  $row["NBoias"]      .             "</td>
-           <td>" .  $row["CapComp"]     .             "</td>
-           <td>" .  $row["MarcaComp"]   .             "</td>
-           <td>" .  $row["DataInsta"]   .             "</td>
-           <td>" .  $row["DataManut"]   .             "</td>
-           <td>" .  $row["MacAddress"]  .             "</td>
-           <td><button id=\"".$row["IDAerador"]."\" onclick=botaoDeleta(this.id)>Deletar</td>
-           <td><button id=\"".$row["IDAerador"]."\" onclick=botaoEdita(this.id)>Editar</td>
-           </tr>";
+      echo "<article><button id=\"".$row["IDAerador"]."\" onclick=botaoAerador(this.id)>
+      <p>" .  $row["Nome"]   .             "</p>
+      <p>" .  $row["IDAerador"]   .             "</p>
+      <p>" .  $row["NBoias"]   .             "</p>
+      <p>" .  $row["NBoias"]   .             "</p>
+      <p>" .  $row["NBoias"]   .             "</p>
+      </button>
+
+      <label class=\"switch\">
+        <input type=\"checkbox\">
+        <span class=\"slider round\"></span>
+        </label></article>";
+
+
+
+      // echo "<tr id=\"aerador".$row["IDAerador"].      "\">
+      //      <td>" .  $row["IDAerador"]   .             "</td>
+      //      <td><button id=\"".$row["IDAerador"]."\" onclick=botaoAerador(this.id)>".$row["Nome"]."</td>
+      //      <td>" .  $row["NBoias"]      .             "</td>
+      //      <td>" .  $row["CapComp"]     .             "</td>
+      //      <td>" .  $row["MarcaComp"]   .             "</td>
+      //      <td>" .  $row["DataInsta"]   .             "</td>
+      //      <td>" .  $row["DataManut"]   .             "</td>
+      //      <td>" .  $row["MacAddress"]  .             "</td>
+      //      <td><button id=\"".$row["IDAerador"]."\" onclick=botaoDeleta(this.id)>Deletar</td>
+      //      <td><button id=\"".$row["IDAerador"]."\" onclick=botaoEdita(this.id)>Editar</td>
+      //      </tr>";
     }
-    echo "</table>";
+    echo "</section>";
   } else {
     echo "0 results";
   }
