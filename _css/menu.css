@@ -1,29 +1,58 @@
 body {
   font-family: "Lato", sans-serif;
+
 }
 
 .sidenav {
-  height: 100%;
-  width: 20vw;
+  height: 95vh;
+  width: 15vw;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: rgb(255,255,255,0.5);
+  border-radius: 1em;
+  margin: 5px;
   overflow-x: hidden;
   padding-top: 20px;
+  align-content: center;
 }
 
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
+.sidenav button {
+  cursor: pointer;
+  padding: 13px 10px 13px 15px;
   font-size: 25px;
-  color: #818181;
+  color: black;
   display: block;
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  border-radius: 0.5em;
+  border: 1px solid rgba(100, 100, 100, 0.6);
+  text-transform: lowercase;
 }
 
-.sidenav a:hover {
-  color: #f1f1f1;
+button::first-letter{
+  text-transform: capitalize;
+}
+
+#voltarMenu{
+  font-weight: bolder;
+  margin-bottom: 25px;
+  border: 2px solid rgba(100, 100, 100, 0.6);
+  background-color:rgba(255, 255, 255, 0.2) ;
+  background-image: url('/_media/icons/menuButton.png');
+  background-repeat:no-repeat;
+  background-size: 20% 65%;
+  background-position: 5% 50%;
+  padding-left: 20%;
+  font-size: 1.5em;
+}
+
+.sidenav button:hover, #voltarMenu:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 @media screen and (max-height: 450px) {

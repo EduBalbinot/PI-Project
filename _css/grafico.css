@@ -1,0 +1,16 @@
+.boxGraficos{
+  width: 50%;
+}
+
+.boxGrafico{
+  aspect-ratio: 2/1;
+  background-color: white;
+  border-width: thick;
+  border-radius: 1em;
+  border: 10px solid green;
+  margin: 0;
+}
+
+.Temp{
+    border-color: red;
+}

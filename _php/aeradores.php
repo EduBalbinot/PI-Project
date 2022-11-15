@@ -2,25 +2,21 @@
 <html>
 <head>
   <meta name="google" content="notranslate" />
-  <!-- <link rel="stylesheet" href="/_css/main.css"> -->
   <link rel="stylesheet" href="/_css/colors.css">
   <link rel="stylesheet" href="/_css/overlay.css">
   <link rel="stylesheet" href="/_css/switch.css">
   <link rel="stylesheet" href="/_css/grid.css">
+  <link rel="stylesheet" href="/_css/main.css">
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
 <div id="main">
-  <button id="botaoMostraCadastro" style="z-index: 2;position: fixed;"; onclick=mostraCadastro(this,1)></button>
-  <?php include "menu.php"; ?>
-  <div id="tabela">
-    <?php
-      $sessao = hiddenID();
-      tabela($sessao);
-      ?>
-    </div>
+  <button id="botaoMostraCadastro"; onclick=mostraCadastro(this,1)></button>
 
-
+  <?php include "menu.php";
+    $sessao = hiddenID();
+    tabela($sessao);
+    ?>
 
 <div id="overlayAerador" class="overlay">
   <div class="overlay-content">
@@ -49,23 +45,19 @@ $(document).ready(function() {
             type: "POST",
             url: 'insert.php',
             data: $(this).serialize(),
-           //  success: function(response)
-           //  {
-                // var jsonData = JSON.parse(response);
-           // }
        });
        location.reload();
      });
 });
 
-function botaoDeleta(id) {
-  $.ajax({
-      type: "POST",
-      url: 'delete.php',
-      data: {data:id}
- });
-       location.reload();
-}
+// function botaoDeleta(id) {
+//   $.ajax({
+//       type: "POST",
+//       url: 'delete.php',
+//       data: {data:id}
+//  });
+//        location.reload();
+// }
 
 function fechaCadastro(){
   document.getElementById("overlayAerador").style.display = "none";

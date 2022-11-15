@@ -7,14 +7,9 @@ body {
   font-family: Arial, sans-serif;
 }
 
-section {
-  top: 0;
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(25deg, rgba(104,188,255,1) 37%, rgba(255,255,255,1) 110%);
-  overflow: hidden;
-  z-index: 0;
+#main{
+    width: 100vw ;
+    padding:0;
 }
 
 section .wave {

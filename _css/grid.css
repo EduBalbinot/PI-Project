@@ -1,10 +1,45 @@
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 250px); grid-gap: 30px;
+#botaoMostraCadastro{
+  padding: 10px;
+  display:block;
+  position:absolute;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  border: none;
+  background:url('/_media/icons/addButton.png') center no-repeat; background-size: 100% 100%;
+  border-radius: 50%;
 }
 
-#main {
-  margin-left: 20vw; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 0px;
+.cards {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.red{
+  border-color: red;
+  background-color: rgba(255, 200, 200, 0.4);
+}
+
+.green{
+  border-color: green;
+  background-color: rgba(200, 255, 200, 0.4);
+}
+
+.card{
+  border-width: thick;
+  border-radius: 1em;
+  font-size: 1em;
+  cursor: pointer;
+  width: 20vw;
+  min-width: 350px;
+  margin: 15px 10px 15px 10px;
+}
+
+
+@media all and (max-width: 600px) {
+  .card{
+    font-size: 0.5em;
+    min-width: 200px;
 }

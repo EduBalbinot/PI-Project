@@ -50,7 +50,7 @@
   margin-top: -4px;
   margin-right: -4px;
 }
-
+/* 
 #botaoMostraCadastro{
   padding: 10px;
   position:absolute;
@@ -60,7 +60,7 @@
   border: none;
   background:url('/_media/icons/addButton.png') center no-repeat; background-size: 100% 100%;
   border-radius: 10px;
-}
+} */
 
 form{
   width: 100%;

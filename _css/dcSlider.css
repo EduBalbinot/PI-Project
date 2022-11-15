@@ -1,0 +1,75 @@
+#main{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input[type="range"] {
+  -webkit-appearance: slider-vertical;
+  width: 50px;
+}
+
+input[type="submit"]{
+border: 1px solid blue;
+background: rgb(255,255,255,0.5);
+cursor: pointer;
+}
+input[type="submit"]:hover{
+  background: rgb(255,255,255,0.7);
+}
+output{
+  font-size: 0.7em;
+}
+#dcCustom{
+  position: relative;
+  display: flex;
+  width: fit-content;
+  padding: 5px;
+  top: 1em;
+  border-radius: 0.5em;
+  background: rgb(0,0,200,0.2);
+}
+
+.dcSlider{
+  border: none;
+  border-radius: 0.3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255,255,255,0.1);
+  border: 1px solid rgb(255,255,255,0.4);
+}
+.informaçoes{
+  width: 50%;
+  height: fit-content;
+}
+.info{
+ display: flex;
+ flex-wrap: wrap;
+ align-content: flex-start;
+ width: 50%;
+
+}
+.info p{
+  font-size: 0.7em ;
+}
+
+.leitura{
+  border: none;
+  border-radius: 1em;
+  background: rgba(255, 255, 255, 0.4);
+  width: 45%;
+  text-align: center;
+  height: fit-content;
+}
+.boxSwitch{
+  text-align: center;
+  width: 100%;
+  background: rgb(255,250,250, 0.2);
+  margin: 1em  20% 0 20%;
+  padding: 10px 0 10px;
+  border-radius: 1em;
+}
+
+@media all and (max-width: 600px) {
+
+}

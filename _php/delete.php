@@ -1,8 +1,10 @@
 <?php
-$user = $_POST['data'];
+$on =$_POST['on'];
+$id =$_POST['id'];
 include 'acess.php';
 $conn = con();
-$sql = "DELETE FROM aerador WHERE IDAerador= '$user' " ; // Insere no DB
+$sql = "UPDATE aerador SET ligado= $on WHERE IDAerador=$id" ; // Insere no DB
 mysqli_query($conn, $sql);
+// echo $user;
 $conn->close();
 ?>

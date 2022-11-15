@@ -30,6 +30,15 @@ function sessaoAerador() {
   return $_SESSION["IDAerador"];
 }
 
+function switchOn($id) {
+  $conn = con();
+  // Apresenta os dados do DB
+  $sql = "SELECT ligado FROM aerador WHERE IdAerador=$id";
+  $result = $conn->query($sql);
+  $a=$result->fetch_assoc();
+  echo $a["ligado"];
+}
+
 function tabela($sessao){
   $conn = con();
   // Apresenta os dados do DB
@@ -38,33 +47,20 @@ function tabela($sessao){
   if ($result->num_rows > 0) {
     echo "<section class=\"cards\">";
     while($row = $result->fetch_assoc()) {
-      echo "<article><button id=\"".$row["IDAerador"]."\" onclick=botaoAerador(this.id)>
-      <p>" .  $row["Nome"]   .             "</p>
-      <p>" .  $row["IDAerador"]   .             "</p>
-      <p>" .  $row["NBoias"]   .             "</p>
-      <p>" .  $row["NBoias"]   .             "</p>
-      <p>" .  $row["NBoias"]   .             "</p>
-      </button>
-
-      <label class=\"switch\">
-        <input type=\"checkbox\">
-        <span class=\"slider round\"></span>
-        </label></article>";
-
-
-
-      // echo "<tr id=\"aerador".$row["IDAerador"].      "\">
-      //      <td>" .  $row["IDAerador"]   .             "</td>
-      //      <td><button id=\"".$row["IDAerador"]."\" onclick=botaoAerador(this.id)>".$row["Nome"]."</td>
-      //      <td>" .  $row["NBoias"]      .             "</td>
-      //      <td>" .  $row["CapComp"]     .             "</td>
-      //      <td>" .  $row["MarcaComp"]   .             "</td>
-      //      <td>" .  $row["DataInsta"]   .             "</td>
-      //      <td>" .  $row["DataManut"]   .             "</td>
-      //      <td>" .  $row["MacAddress"]  .             "</td>
-      //      <td><button id=\"".$row["IDAerador"]."\" onclick=botaoDeleta(this.id)>Deletar</td>
-      //      <td><button id=\"".$row["IDAerador"]."\" onclick=botaoEdita(this.id)>Editar</td>
-      //      </tr>";
+      $ligado=$row["ligado"];
+      if($ligado) $color="green";
+      else $color="red";
+      echo "<article><button id=\"".$row["IDAerador"]."\" onclick=botaoAerador(this.id) class=\"card ".$color. "\">
+      <h3>" .  $row["Nome"]   .                                "</h3>
+      <p>ID:" .  $row["IDAerador"]   .                        "</p>
+      <p>Número de bóias: " .  $row["NBoias"]   .       " bóias</p>
+      <p>Capacidade: " .  $row["CapComp"]   .               "m³</p>
+      <p>Marca: " .  $row["MarcaComp"]   .                    "</p>
+      <p>Frequencia: " .  $row["freq"]   .              "</p>
+      <p>MAC: " .  $row["MacAddress"]   .                     "</p>
+      <p>Data Instalação: " .  $row["DataInsta"]   .          "</p>
+      <p>Data Última Manutenção:</p><p> " .  $row["DataManut"]   .   "</p>
+      </button></article>";
     }
     echo "</section>";
   } else {
@@ -76,17 +72,30 @@ $conn->close();
 function tabelaLeitura($IDAerador){
   $conn = con();
   // Apresenta os dados do DB
-  $sql = "SELECT * FROM leitura WHERE IDAerador=$IDAerador";
+  $day= date('d');
+  $mes= date('m');
+  $ano= date('Y');
+  $sql = "SELECT * FROM aerador WHERE IDAerador=$IDAerador";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    $info=$result->fetch_assoc();
+  }
+  $sql = "SELECT * FROM leitura WHERE IDLeitura IN (SELECT max(IDLeitura) FROM leitura GROUP BY IDAerador) AND IDAerador=$IDAerador";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    $leitura=$result->fetch_assoc();
+  }
+  $sql = "SELECT Temp,Vazao,Data FROM leitura WHERE IDAerador=$IDAerador AND DAY(Data)=$day AND MONTH(Data)=$mes AND YEAR(Data)=$ano";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
       $temp[]=$row["Temp"];
       $vazao[]=$row["Vazao"];
-      $hora[]=$row["Hora"];
+      $data[]=$row["Data"];
     }
   }
 $conn->close();
-return array($hora,$vazao,$temp);
+return array($data,$vazao,$temp,$info,$leitura);
 }
 
 function tabelaMenu($sessao){
@@ -96,7 +105,7 @@ function tabelaMenu($sessao){
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-      echo "<a><button class=\"menuButton\" id=\"".$row["IDAerador"]."\" onclick=botaoAerador(this.id)>".$row["Nome"]."</a>";
+      echo "<button class=\"menuButton\" id=\"".$row["IDAerador"]."\" onclick=botaoAerador(this.id)>".$row["Nome"]."";
     }
   } else {
     echo "0 results";

@@ -38,35 +38,19 @@ $DCIndex = (date('H')*60+date('i'))/((24*60)/$nbrDCarray);
 
 foreach ($object as &$value) {
   // Apresenta os dados do DB
-  $sql = "SELECT * FROM aerador WHERE MacAddress= '$value'";
+  $sql = "SELECT * FROM aerador WHERE MACMestre= '$value'";
   $result = $conn->query($sql);
 
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
       $DC=json_decode($row["DutyCycle"]);
-      array_push($ARR,array("Mac"=>$row["MacAddress"], "ID"=>$row["IDAerador"], "freq"=>$row["freq"],"DC"=>$DC[$DCIndex]));
+      array_push($ARR,array("Mac"=>$row["MacAddress"], "freq"=>$row["freq"],"DC"=>$DC[$DCIndex],"Ligado"=>$row["ligado"]));
     }
   } else {
       print "Mac Inválido: $value\n ";
   }
 }
 
-//adiciona as frequencias dos aeradores sem endereços MAC
-$sql = "SELECT * FROM aerador WHERE MacAddress IS NULL";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-  while($row = $result->fetch_assoc()) {
-    $DC=json_decode($row["DutyCycle"]);
-    array_push($new,array("ID"=>$row["IDAerador"], "freq"=>$row["freq"], "DC"=>$DC[$DCIndex]));
-  }
-} else {
-  print "Sem nada novo";
-}
-
-  // $ARR["new"]=$new;
-  $arr[0]=$ARR;
-  $arr[1]=$new;
-
-  print_r($arr);
+  print_r(json_encode($ARR));
   $conn->close();
 ?>

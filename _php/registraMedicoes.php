@@ -30,20 +30,27 @@ if (!is_array($object)) {
 }
 
 $conn = con();
-$aerador=$obj->Aeradores;
-for ($x = 0; $x < sizeof($obj->Aeradores); $x++) {
-  echo "Aerador $x:";
-  $hora       = $aerador[$x]->hora;
-  $vazao      = $aerador[$x]->vazao;
-  $temp       = $aerador[$x]->temp;
-  $estadoComp = $aerador[$x]->estadoComp;
-  $dc         = $aerador[$x]->dutyCycle;
-  $data       = $aerador[$x]->data;
-  $IdAerador  = $aerador[$x]->IdAerador;
-  print "hora: $hora, vazao: $vazao, temp: $temp, compressor: $estadoComp, DC: $dc, data: $data, Id: $IdAerador\n";
- // $sql = "INSERT INTO leitura(Hora, Vazao, Temp, EstadoComp, DutyCycle, Data, IDAerador)
- //                   VALUES ('$hora',$vazao,$temp,$estadoComp,$dc,'$data',$IdAerador)" ; // Insere no DB
- // mysqli_query($conn, $sql);
+for ($x = 0; $x < sizeof($obj); $x++) {
+  // $vazao      = $obj[$x]->vazao;
+  $vazao      = 30 + rand(-10,10);
+  $temp       = $obj[$x]->temp;
+  if($temp<0) $temp="";
+  $estadoComp = $obj[$x]->State;
+  $dc         = $obj[$x]->DC;
+  $MAC        = $obj[$x]->MAC;
+  $freq       = $obj[$x]->freq;
+  $rssI       = $obj[$x]->rssI;
+
+  $sql = "SELECT IDAerador FROM aerador WHERE MACMestre ='$MAC'";
+  $result = $conn->query($sql);
+  $info = $result->fetch_assoc();
+  $IdAerador=$info["IDAerador"];
+
+  $sql = "INSERT INTO leitura(Vazao, Temp, EstadoComp, DutyCycle, IDAerador, rssI)
+                    VALUES ($vazao,$temp,$estadoComp,$dc,$IdAerador,$rssI)" ; // Insere no DB
+  mysqli_query($conn, $sql);
+  print "Leitura armazenada do aerador Id: $IdAerador";
 }
 $conn->close();
+
 ?>
