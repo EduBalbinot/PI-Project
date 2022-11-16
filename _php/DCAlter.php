@@ -7,7 +7,6 @@
   $IDAerador=sessaoAerador();
   $i=2;
   $dc=json_encode($_POST);
-  echo json_encode($_POST);
 
   $sql = "UPDATE aerador SET DutyCycle=('$dc') WHERE IDAerador=$IDAerador"; // Insere no DB
     mysqli_query($conn, $sql);

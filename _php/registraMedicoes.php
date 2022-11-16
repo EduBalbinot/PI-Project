@@ -32,24 +32,28 @@ if (!is_array($object)) {
 $conn = con();
 for ($x = 0; $x < sizeof($obj); $x++) {
   // $vazao      = $obj[$x]->vazao;
-  $vazao      = 30 + rand(-10,10);
   $temp       = $obj[$x]->temp;
-  if($temp<0) $temp="";
-  $estadoComp = $obj[$x]->State;
-  $dc         = $obj[$x]->DC;
-  $MAC        = $obj[$x]->MAC;
-  $freq       = $obj[$x]->freq;
-  $rssI       = $obj[$x]->rssI;
+  if($temp>-20){ //verifica se a leitura foi bem sucedida, leitura má sucedida é $temp=-125
+    $vazao      = 30;
+    $estadoComp = $obj[$x]->State;
+    $dc         = $obj[$x]->DC;
+    $MAC        = $obj[$x]->MAC;
+    $freq       = $obj[$x]->freq;
+    $rssI       = $obj[$x]->rssI;
 
-  $sql = "SELECT IDAerador FROM aerador WHERE MACMestre ='$MAC'";
-  $result = $conn->query($sql);
-  $info = $result->fetch_assoc();
-  $IdAerador=$info["IDAerador"];
+    $sql = "SELECT IDAerador FROM aerador WHERE MACMestre ='$MAC'";
+    $result = $conn->query($sql);
+    $info = $result->fetch_assoc();
+    $IdAerador=$info["IDAerador"];
 
-  $sql = "INSERT INTO leitura(Vazao, Temp, EstadoComp, DutyCycle, IDAerador, rssI)
-                    VALUES ($vazao,$temp,$estadoComp,$dc,$IdAerador,$rssI)" ; // Insere no DB
-  mysqli_query($conn, $sql);
-  print "Leitura armazenada do aerador Id: $IdAerador";
+    $sql = "INSERT INTO leitura(Vazao, Temp, EstadoComp, DutyCycle, IDAerador, rssI)
+                      VALUES ($vazao,$temp,$estadoComp,$dc,$IdAerador,$rssI)" ; // Insere no DB
+    mysqli_query($conn, $sql);
+    print "Leitura armazenada do aerador Id: $IdAerador";
+  }
+  else {
+    print "Falha na leitura da temperatura";
+  }
 }
 $conn->close();
 
