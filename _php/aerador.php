@@ -31,11 +31,11 @@
     <p>Marca: " .  $infoAerador["MarcaComp"]   .                    "</p>
     <p>Frequencia: " .  $infoAerador["freq"]   .                    "</p>
     <p>MAC: " .  $infoAerador["MacAddress"]   .                     "</p>
-    <p>Data Instalação: " .  $infoAerador["DataInsta"]   .          "</p>
-    <p>Data Última Manutenção: " .  $infoAerador["DataManut"]   .   "</p></div>
+    <p>Data Instalação: " .  $infoAerador["DATE_FORMAT(DataInsta, '%d/%m/%Y')"]   .          "</p>
+    <p>Data Última Manutenção: " .  $infoAerador["DATE_FORMAT(DataManut, '%d/%m/%Y')"]   .   "</p></div>
     <div class=\"leitura\">
     <h4>Última leitura</h4>
-    <p>Data: " .  $leitura["Data"]   .   "</p>
+    <p>Data: " .  $leitura["DATE_FORMAT(Data, '%d/%m/%Y %H:%i:%s')"]   .   "</p>
     <p>Pressão: " .  $leitura["Vazao"]   .   " mPa</p>
     <p>Estado Compressor: " .  $estado   .   "</p>
     <p>Duty Cycle: " .  $leitura["DutyCycle"]   .   "</p>
@@ -51,7 +51,7 @@
  <form id="dcCustom" method="post">
    <?php
       $DC= json_decode($infoAerador["DutyCycle"]);
-     for($i=0; $i<=12; $i++){
+     for($i=0; $i<=11; $i++){
        $a=$i*2;
        echo "<div class=\"dcSlider\">";
        echo "<p>".$a."h</p>";

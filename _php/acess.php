@@ -42,7 +42,7 @@ function switchOn($id) {
 function tabela($sessao){
   $conn = con();
   // Apresenta os dados do DB
-  $sql = "SELECT * FROM aerador WHERE IDUsuario=$sessao";
+  $sql = "SELECT IDAerador,Nome,NBoias,DutyCycle,CapComp,MarcaComp,freq,MacAddress,DATE_FORMAT(DataInsta, '%d/%m/%Y'),DATE_FORMAT(DataManut, '%d/%m/%Y'),ligado FROM aerador WHERE IDUsuario=$sessao";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     echo "<section class=\"cards\">";
@@ -58,8 +58,8 @@ function tabela($sessao){
       <p>Marca: " .  $row["MarcaComp"]   .                    "</p>
       <p>Frequencia: " .  $row["freq"]   .              "</p>
       <p>MAC: " .  $row["MacAddress"]   .                     "</p>
-      <p>Data Instalação: " .  $row["DataInsta"]   .          "</p>
-      <p>Data Última Manutenção:</p><p> " .  $row["DataManut"]   .   "</p>
+      <p>Data Instalação: " .  $row["DATE_FORMAT(DataInsta, '%d/%m/%Y')"]   .          "</p>
+      <p>Data Última Manutenção:</p><p> " .  $row["DATE_FORMAT(DataManut, '%d/%m/%Y')"]   .   "</p>
       </button></article>";
     }
     echo "</section>";
@@ -75,12 +75,12 @@ function tabelaLeitura($IDAerador){
   $day= date('d');
   $mes= date('m');
   $ano= date('Y');
-  $sql = "SELECT * FROM aerador WHERE IDAerador=$IDAerador";
+  $sql = "SELECT IDAerador,Nome,NBoias,DutyCycle,CapComp,MarcaComp,freq,MacAddress,DATE_FORMAT(DataInsta, '%d/%m/%Y'),DATE_FORMAT(DataManut, '%d/%m/%Y'),ligado FROM aerador WHERE IDAerador=$IDAerador";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     $info=$result->fetch_assoc();
   }
-  $sql = "SELECT * FROM leitura WHERE IDLeitura IN (SELECT max(IDLeitura) FROM leitura GROUP BY IDAerador) AND IDAerador=$IDAerador";
+  $sql = "SELECT Temp,Vazao,Data,DutyCycle,DATE_FORMAT(Data, '%d/%m/%Y %H:%i:%s'),rssI,EstadoComp FROM leitura WHERE IDLeitura IN (SELECT max(IDLeitura) FROM leitura GROUP BY IDAerador) AND IDAerador=$IDAerador";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     $leitura=$result->fetch_assoc();

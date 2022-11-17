@@ -13,7 +13,7 @@
 #define DIO0 26
 
 //Endereço servidor
-String server = "http://192.168.1.158/";
+String server = "http://192.168.137.234/";
 String enviaphp =  server + "_php/registraMedicoes.php";
 String recebephp = server + "_php/lerConfigAerador.php";
 
@@ -21,11 +21,11 @@ String recebephp = server + "_php/lerConfigAerador.php";
 WiFiClient client;
 HTTPClient http;
 
-//const char* ssid = "Mateus";
-//const char* password = "Mateus1998";
+const char* ssid = "Mateus";
+const char* password = "Mateus1998";
 
-const char* ssid = "Oeste Telecom Magaiver";
-const char* password = "magaiver02041971";
+//const char* ssid = "Oeste Telecom Magaiver";
+//const char* password = "magaiver02041971";
 
 //const char* ssid = "DUDU7701";
 //const char* password = "12131213";
